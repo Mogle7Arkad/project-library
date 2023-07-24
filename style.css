@@ -25,6 +25,7 @@ form{
 }
 .content{
     margin: auto;
+    margin-left: 27px;
     margin-top: 20px;
 }
 input{
@@ -32,12 +33,14 @@ input{
     border-radius: 10px;
 }
 #read{
+    margin-left: 90px;
     margin-bottom: 20px;
 }
 #addBook{
     width: 80%;
     margin: auto;
     margin-bottom: 20px;
+    margin-left: 25px;
 }
 /* cards */
 /*.books-grid {
