@@ -42,25 +42,20 @@ input{
     margin-bottom: 20px;
     margin-left: 25px;
 }
-/* cards */
-/*.books-grid {
+
+.books-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--spacing-xl);
-    margin-top: var(--spacing-xl);
-  }
-  
-  .book-card {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+    margin: 10px;
+}
+.book-card{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     font-size: 20px;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    background-color: var(--white);
-    box-shadow: var(--shadow);
-    line-height: 1.2;
-  }*/
-
+    padding: 10px;
+}
   
