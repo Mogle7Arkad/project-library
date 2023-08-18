@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background: url(./img/bookbackground1.jpg);
+    background-size: cover;
+}
 .wrapper{
     width: 300px;
     margin: auto;
@@ -14,6 +18,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 25px;
+    font-weight: bold;
 }
 form{
     border: 1px solid;
@@ -35,6 +40,7 @@ input{
 #read{
     margin-left: 90px;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 #addBook{
     width: 80%;
@@ -58,4 +64,27 @@ input{
     font-size: 20px;
     padding: 10px;
 }
-  
+.card-body button{
+    padding: 8px;
+    border-radius: 5px;
+    margin: 5px;
+}
+  .card-body{
+    margin: auto;
+    padding: 10px;
+    border: 1px black solid;
+    border-radius: 5px;
+  }
+  .card-body h3{
+    padding: 5px;
+    font-size: 20px;
+  }
+  .card-body h5{
+    font-size: 16px;
+    padding: 5px;
+  }
+  .card-body p{
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }

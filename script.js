@@ -25,12 +25,10 @@ function render(){
         bookEl.innerHTML = `<p>${book.title}</p>`;
         bookEl.setAttribute('class', '.book-card');
         bookEl.innerHTML = `
-            <div class = 'card-header'>
-                <h3 class = 'title'>${book.title}</h3>
-                <h5 class = 'author'>by ${book.author}</h5>
-            </div>
             <div class = 'card-body'>
-                <p>${book.pages} pages</p>
+                <h3 class = 'title'>${book.title}</h3>
+                <h5 class = 'author'>By: ${book.author}</h5>
+                <p>${book.pages} Pages</p>
                 <p class = 'read-status'>${book.read ?'Read' : 'Not Yet'}</p>
                 <button class = 'remove-btn' onclick = 'removeBook(${i})'>Remove</button>
                 <button class = 'toggleRead-btn' onclick = 'toggleRead(${i})'>Toggle Read</button>
