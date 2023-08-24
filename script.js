@@ -7,14 +7,32 @@ function Book(title, author, pages, read){
     this.read = read;
 }
 
+function removeBook(index){
+    myLibrary.splice(index, 1);
+    render();
+}
+
 Book.prototype.toggleRead = function(){
-    this.read = !this.read;
+    this.read =! this.read;
 }
 
 function toggleRead(index){
-    myLibrary[index].toggleRead();
+    !myLibrary[index].toggleRead();
     render();
 }
+
+function addBookToLibrary(){
+   let title = document.querySelector('#title').value
+   let author = document.querySelector('#author').value
+   let pages = document.querySelector('#pages').value
+   let reads = document.querySelector('#reads').checked
+   let newBook = new Book(title, author, pages, reads);
+   myLibrary.push(newBook);
+   render();
+
+}
+
+
 
 function render(){
     let libraryEl = document.querySelector('#booksGrid');
@@ -29,28 +47,22 @@ function render(){
                 <h3 class = 'title'>${book.title}</h3>
                 <h5 class = 'author'>By: ${book.author}</h5>
                 <p>${book.pages} Pages</p>
-                <p class = 'read-status'>${book.read ?'Read' : 'Not Yet'}</p>
+                <p class = 'read-status'>Status: ${book.read ?'Read' : 'Not Yet'}</p>
                 <button class = 'remove-btn' onclick = 'removeBook(${i})'>Remove</button>
                 <button class = 'toggleRead-btn' onclick = 'toggleRead(${i})'>Toggle Read</button>
             </div>
             `;
         libraryEl.appendChild(bookEl)
     }
+    
 }
 
-function removeBook(index){
-    myLibrary.splice(index, 1);
-    render();
-}
-
-function addBookToLibrary(){
-   let title = document.querySelector('#title').value
-   let author = document.querySelector('#author').value
-   let pages = document.querySelector('#pages').value
-   let reads = document.querySelector('#reads').value
-   let newBook = new Book(title, author, pages, reads);
-   myLibrary.push(newBook);
-   render();
+  
+const clearForm = () => {
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    reads.value = "";
 }
 
 let newBookBtn = document.querySelector('.newBook-btn');
@@ -62,4 +74,5 @@ newBookBtn.addEventListener('click', function(){
 document.querySelector('.newBook-form').addEventListener('submit', function(event){
     event.preventDefault()
     addBookToLibrary();
+    clearForm();
 })
