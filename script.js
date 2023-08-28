@@ -7,19 +7,11 @@ function Book(title, author, pages, read){
     this.read = read;
 }
 
-function removeBook(index){
-    myLibrary.splice(index, 1);
-    render();
-}
-
-Book.prototype.toggleRead = function(){
-    this.read =! this.read;
-}
-
-function toggleRead(index){
-    !myLibrary[index].toggleRead();
-    render();
-}
+let newBookBtn = document.querySelector('.newBook-btn');
+newBookBtn.addEventListener('click', function(){
+     let newBookForm = document.querySelector('.newBook-form')
+     newBookForm.style.display = 'block';
+})
 
 function addBookToLibrary(){
    let title = document.querySelector('#title').value
@@ -32,32 +24,84 @@ function addBookToLibrary(){
 
 }
 
+function createBook(item){
+    const bookGrid = document.querySelector('#booksGrid');
+    const bookDiv = document.createElement('div');
+    const titleDiv = document.createElement('div');
+    const authDiv = document.createElement('div');
+    const pageDiv = document.createElement('div');
+    const removeBtn = document.createElement('button');
+    const readBtn = document.createElement('button');
 
+    bookDiv.classList.add('book');
+    bookDiv.setAttribute('id', myLibrary.indexOf(item));
 
-function render(){
-    let libraryEl = document.querySelector('#booksGrid');
-    libraryEl.innerHTML = '';
-    for (let i = 0; i < myLibrary.length; i++){
-        let book = myLibrary[i];
-        let bookEl = document.createElement('div');
-        bookEl.innerHTML = `<p>${book.title}</p>`;
-        bookEl.setAttribute('class', '.book-card');
-        bookEl.innerHTML = `
-            <div class = 'card-body'>
-                <h3 class = 'title'>${book.title}</h3>
-                <h5 class = 'author'>By: ${book.author}</h5>
-                <p>${book.pages} Pages</p>
-                <p class = 'read-status'>Status: ${book.read ?'Read' : 'Not Yet'}</p>
-                <button class = 'remove-btn' onclick = 'removeBook(${i})'>Remove</button>
-                <button class = 'toggleRead-btn' onclick = 'toggleRead(${i})'>Toggle Read</button>
-            </div>
-            `;
-        libraryEl.appendChild(bookEl)
-    }
+    titleDiv.textContent = item.title;
+    titleDiv.classList.add('title');
+    bookDiv.appendChild(titleDiv);
+
+    authDiv.textContent = item.author;
+    authDiv.classList.add('author');
+    bookDiv.appendChild(authDiv);
+
+    pageDiv.textContent = item.pages;
+    pageDiv.classList.add('pages');
+    bookDiv.appendChild(pageDiv);
+
+    readBtn.classList.add('readBtn'); 
     
+    readBtn.addEventListener('click', () => { 
+        item.read = !item.read;
+        setData();
+        render();
+    }); 
+    bookDiv.appendChild(readBtn);
+
+    if(item.read===false) {
+        readBtn.textContent = 'Not Read';
+        readBtn.style.backgroundColor = '#e04f63';
+    }else {
+        readBtn.textContent = 'Read';
+        readBtn.style.backgroundColor = '#63da63';
+    }
+
+    removeBtn.textContent = 'Remove'; 
+    removeBtn.setAttribute('id', 'removeBtn');
+    bookDiv.appendChild(removeBtn);
+
+    bookGrid.appendChild(bookDiv);
+
+    removeBtn.addEventListener('click', () =>{
+        removeBook();
+        setData();
+    })
+
+
+};
+
+let newBookForm = document.querySelector(".newBook-form");
+function close(){
+    newBookForm.style.display = 'none';
 }
 
-  
+document.querySelector('#addBook').addEventListener('click', function(event){
+    event.preventDefault();
+    addBookToLibrary();
+    close();
+    setData();
+    clearForm();
+})
+
+function render(){
+    const display = document.querySelector('.books-grid');
+    const books = document.querySelectorAll('.book');
+    books.forEach(book => display.removeChild(book));
+
+    for (let i = 0; i < myLibrary.length; i++){
+        createBook(myLibrary[i]);
+    }
+}
+
 const clearForm = () => {
     title.value = "";
     author.value = "";
@@ -65,14 +109,20 @@ const clearForm = () => {
     reads.value = "";
 }
 
-let newBookBtn = document.querySelector('.newBook-btn');
-newBookBtn.addEventListener('click', function(){
-     let newBookForm = document.querySelector('.newBook-form')
-     newBookForm.style.display = 'block';
-})
+function removeBook(index){
+    myLibrary.splice(index, 1);
+    render();
+}
 
-document.querySelector('.newBook-form').addEventListener('submit', function(event){
-    event.preventDefault()
-    addBookToLibrary();
-    clearForm();
-})
+function setData() {
+    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+}
+
+function restore() {
+    myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+    render();
+}
+
+restore();
+
+
