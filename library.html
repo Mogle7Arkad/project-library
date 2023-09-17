@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Cataloging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <button class="newBook-btn">New Book</button>
+        <form class="newBook-form" style="display:none">
+            <div class="content">
+                <input type="text" placeholder="Title" id="title">
+            </div>
+            <div class="content">
+                <input type="text" placeholder="Author" id="author">
+            </div>
+            <div class="content">
+                <input type="number" placeholder="Pages" id="pages">
+            </div>
+            <div class="content" id="read">
+                <label for="read">Read: </label>
+                <input type="checkbox" id="reads">
+            </div>
+            <input type="submit" value="Add Book" id="addBook">
+        </form>
+    </div>
+    <div class="books-grid" id="booksGrid"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
